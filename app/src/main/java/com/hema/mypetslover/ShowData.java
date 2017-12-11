@@ -1,25 +1,17 @@
 package com.hema.mypetslover;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v4.util.Pair;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,21 +22,10 @@ import com.firebase.client.Firebase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import static android.R.attr.direction;
-import static java.security.AccessController.getContext;
-
 
 
 public class ShowData extends AppCompatActivity {
@@ -57,6 +38,7 @@ public class ShowData extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseUser user;
 
+    long currentVisiblePosition = 0;
     int x;
 
     private FirebaseRecyclerAdapter<ShowDataItems, ShowDataViewHolder> mFirebaseAdapter;
@@ -67,7 +49,11 @@ public class ShowData extends AppCompatActivity {
 
     ArrayList<String> pl;
 
+    int positionIndex,topView;
+    LinearLayoutManager llManager;
 
+
+    private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,8 +65,12 @@ public class ShowData extends AppCompatActivity {
 
         pl=new ArrayList<>();
 
+        llManager= new LinearLayoutManager(ShowData.this);
+
 
         editor = getSharedPreferences("SHARED", MODE_PRIVATE).edit();
+        editor2 = getSharedPreferences("SHARED2", MODE_PRIVATE).edit();
+
 
 
 
@@ -94,17 +84,9 @@ public class ShowData extends AppCompatActivity {
 
 
         recyclerView = (RecyclerView) findViewById(R.id.show_data_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(ShowData.this));
+        recyclerView.setLayoutManager(llManager);
         Toast.makeText(ShowData.this, "Wait !  Fetching List...", Toast.LENGTH_SHORT).show();
 
-
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //Log.d("LOGGED", "IN onStart ");
         mFirebaseAdapter = new FirebaseRecyclerAdapter<ShowDataItems,
                 ShowDataViewHolder>(ShowDataItems.class, R.layout.show_data_single_item_general, ShowDataViewHolder.class, myRef) {
 
@@ -127,7 +109,30 @@ public class ShowData extends AppCompatActivity {
 
 
         recyclerView.setAdapter(mFirebaseAdapter);
+
+
+
     }
+
+
+  /*  @Override
+    protected void onResume() {
+        super.onResume();
+        if (positionIndex!= -1) {
+            llManager.scrollToPositionWithOffset(positionIndex, topView);
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        positionIndex= llManager.findFirstVisibleItemPosition();
+        View startView = recyclerView.getChildAt(0);
+        topView = (startView == null) ? 0 : (startView.getTop() - recyclerView.getPaddingTop());
+
+    }*/
 
 
     //View Holder For Recycler View
@@ -205,7 +210,7 @@ public class ShowData extends AppCompatActivity {
                 startActivity(new Intent(this, ShowData.class));
                 return true;
             case R.id.my_pets:
-                startActivity(new Intent(this, myPets.class));
+                startActivity(new Intent(this, MyPets.class));
                 return true;
             case R.id.upload_pets:
                 startActivity(new Intent(this, Uploadinfo.class));
@@ -224,5 +229,24 @@ public class ShowData extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if(savedInstanceState != null)
+        {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+    }
+
 
 }

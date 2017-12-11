@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
+
     defaultConfig {
         applicationId "com.hema.mypetslover"
         minSdkVersion 15
@@ -48,7 +49,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-ads:10.2.0'
     compile 'com.google.android.gms:play-services-analytics:10.2.0'
 
-    "compile 'com.firebase:firebase-jobdispatcher:0.8.5'"
 
 
 

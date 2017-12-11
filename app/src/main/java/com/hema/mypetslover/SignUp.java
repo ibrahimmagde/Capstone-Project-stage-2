@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
-public class Sign_up extends AppCompatActivity {
+public class SignUp extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private EditText email,password,name;
@@ -84,7 +84,7 @@ public class Sign_up extends AppCompatActivity {
     private void callsignup(String email,String password) {
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(Sign_up.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
 
 
                     @Override
@@ -95,12 +95,12 @@ public class Sign_up extends AppCompatActivity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(Sign_up.this, "Signed up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Signed up Failed", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             userProfile();
-                            Toast.makeText(Sign_up.this, "Created Account", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Created Account", Toast.LENGTH_SHORT).show();
                             Log.d("TESTING", "Created Account");
                         }
                     }

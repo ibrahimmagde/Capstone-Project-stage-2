@@ -22,12 +22,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.client.Firebase;
-import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -233,7 +231,7 @@ public class Uploadinfo extends AppCompatActivity {
                 Firebase mGender1 = mUser.child("Gender");
                 mGender1.setValue(gender);
 
-                startActivity(new Intent(getApplicationContext(),myPets.class));
+                startActivity(new Intent(getApplicationContext(),MyPets.class));
 
             }
         });
@@ -291,9 +289,9 @@ public class Uploadinfo extends AppCompatActivity {
 
                         editor2.putString("give", String.valueOf(downloadUri));
                         editor2.apply();
-                        Intent intentwidget = new Intent(getApplicationContext(), widget.class);
+                        Intent intentwidget = new Intent(getApplicationContext(), Widget.class);
                         intentwidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                        int ids[] = AppWidgetManager.getInstance(getApplicationContext()).getAppWidgetIds(new ComponentName(getApplicationContext(), widget.class));
+                        int ids[] = AppWidgetManager.getInstance(getApplicationContext()).getAppWidgetIds(new ComponentName(getApplicationContext(), Widget.class));
                         intentwidget.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
                         getApplicationContext().sendBroadcast(intentwidget);
 
@@ -330,7 +328,7 @@ public class Uploadinfo extends AppCompatActivity {
                 startActivity(new Intent(this, ShowData.class));
                 return true;
             case R.id.my_pets:
-                startActivity(new Intent(this, myPets.class));
+                startActivity(new Intent(this, MyPets.class));
                 return true;
             case R.id.upload_pets:
                 startActivity(new Intent(this, Uploadinfo.class));
