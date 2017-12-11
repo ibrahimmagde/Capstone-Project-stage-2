@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="ga_trackingId">UA-111005162-1</string>
+    <bool name="ga_autoActivityTracking">true</bool>
+    <screenName name="com.hema.mypetslover.myPets">My pets</screenName>
+    <screenName name="com.hema.mypetslover.ShowData">People's pets</screenName>
+    <screenName name="com.hema.mypetslover.Uploadinfo">Upload pet</screenName>
+
+</resources>

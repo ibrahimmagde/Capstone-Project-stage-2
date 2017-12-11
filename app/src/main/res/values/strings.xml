@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">My Pet\'s Lover</string>
+    <string name="my_text"> <u>not registered ? Sign up here</u>.</string>
+    <string name="interest">Interested</string>
+    <string name="emaileditbox">Email</string>
+    <string name="passwordeditbox">Password</string>
+    <string name="signupbutton">sign up</string>
+    <string name="signinbutton">Sign In</string>
+    <string name="listofmypets">list of your pets</string>
+    <string name="listofotherpeoplpets">list of other people pets</string>
+    <string name="selectimage">select image</string>
+    <string name="addgenderandcontact">add gender and contact information</string>
+    <string name="uploadbutton">upload</string>
+    <string name="gosignuptext">sign up </string>
+    <string name="uploadimag">Upload image </string>
+    <string name="gender">your phone or email or other</string>
+    <string name="email">your email please</string>
+    <string name="phone">your phone please</string>
+    <string name="district">your district please</string>
+
+
+    <string name="petname">your pet\'s name</string>
+    <string name="searchfor">Search for :</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="name">Name :</string>
+    <string name="searchFOR">Search for :</string>
+    <string name="myphone">Phone :</string>
+    <string name="myEmail">Email :</string>
+    <string name="myDistrict">District :</string>
+
+
+    <string name="delete">delete</string>
+
+    <string name="loadanot">Suggest Anoter</string>
+    <string name="need">need :</string>
+    <string name="live">live in :</string>
+    <string name="callmee">call me :</string>
+    <string name="myemail">my email :</string>
+
+
+
+
+    <string name="ad">google ad</string>
+
+
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+
+
+
+</resources>

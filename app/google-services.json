@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "245395769428",
+    "firebase_url": "https://my-pet-s-lover.firebaseio.com",
+    "project_id": "my-pet-s-lover",
+    "storage_bucket": "my-pet-s-lover.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245395769428:android:86b3c079e1908663",
+        "android_client_info": {
+          "package_name": "com.hema.mypetslover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245395769428-lcu6o1cccttbfeplr7tumj2pudcmd3d1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWzcGdnMXdtCrh89arrinXs2Sx4X1Pd9Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
