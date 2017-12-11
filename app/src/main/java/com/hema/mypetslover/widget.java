@@ -121,7 +121,6 @@ public class widget extends  AppWidgetProvider {
             int[] appWidgetIds = extras.getIntArray(AppWidgetManager.EXTRA_APPWIDGET_IDS);
             if (appWidgetIds != null && appWidgetIds.length > 0) {
                 this.onUpdate(context, AppWidgetManager.getInstance(context), appWidgetIds);
-               // Log.i(widget.class.getName(), context.getResources().getString(R.string.widget_refreshing_msg));
             }
         }
     }

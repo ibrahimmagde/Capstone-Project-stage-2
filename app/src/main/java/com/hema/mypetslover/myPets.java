@@ -40,9 +40,6 @@ import java.util.ArrayList;
 import static android.R.attr.direction;
 import static java.security.AccessController.getContext;
 
-/**
- * Created by Administrator on 16-03-2017.
- */
 
 public class myPets extends AppCompatActivity {
 
