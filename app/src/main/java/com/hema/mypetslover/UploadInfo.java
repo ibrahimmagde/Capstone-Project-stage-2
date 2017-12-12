@@ -39,13 +39,13 @@ import com.google.firebase.storage.UploadTask;
 import java.util.Random;
 
 
-public class Uploadinfo extends AppCompatActivity {
+public class UploadInfo extends AppCompatActivity {
 
     public static final int READ_EXTERNAL_STORAGE = 0;
     private static final int GALLERY_INTENT = 2;
     static SharedPreferences.Editor editor2;
-    Button select_image, upload_button;
-    ImageView user_image;
+    Button selectImage, mUploadButton;
+    ImageView mUserImage;
     EditText title, contactInfo, email, district;
     RadioGroup mRadioGroup;
     FirebaseUser user;
@@ -75,9 +75,9 @@ public class Uploadinfo extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
 
-        select_image = (Button) findViewById(R.id.select_image);
-        upload_button = (Button) findViewById(R.id.upload_bttn);
-        user_image = (ImageView) findViewById(R.id.user_image);
+        selectImage = (Button) findViewById(R.id.select_image);
+        mUploadButton = (Button) findViewById(R.id.upload_bttn);
+        mUserImage = (ImageView) findViewById(R.id.user_image);
         title = (EditText) findViewById(R.id.etTitle);
         contactInfo = (EditText) findViewById(R.id.phone);
         email = (EditText) findViewById(R.id.email);
@@ -87,11 +87,11 @@ public class Uploadinfo extends AppCompatActivity {
 
 
         //Initialize the Progress Bar
-        mProgressDialog = new ProgressDialog(Uploadinfo.this);
+        mProgressDialog = new ProgressDialog(UploadInfo.this);
 
 
         //Select image from External Storage...
-        select_image.setOnClickListener(new View.OnClickListener() {
+        selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Check for Runtime Permission
@@ -117,7 +117,7 @@ public class Uploadinfo extends AppCompatActivity {
 
 
         //Click on Upload Button Title will upload to Database
-        upload_button.setOnClickListener(new View.OnClickListener() {
+        mUploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -257,7 +257,7 @@ public class Uploadinfo extends AppCompatActivity {
             mImageUri = data.getData();
 
 
-            user_image.setImageURI(mImageUri);
+            mUserImage.setImageURI(mImageUri);
 
             StorageReference filePath = mStorage.child("User_Images").child(mImageUri.getLastPathSegment());
 
@@ -288,7 +288,7 @@ public class Uploadinfo extends AppCompatActivity {
                             .crossFade()
                             .placeholder(R.drawable.loading)
                             .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                            .into(user_image);
+                            .into(mUserImage);
                     Toast.makeText(getApplicationContext(), "Updated.", Toast.LENGTH_SHORT).show();
                     mProgressDialog.dismiss();
                 }
@@ -316,7 +316,7 @@ public class Uploadinfo extends AppCompatActivity {
                 startActivity(new Intent(this, MyPets.class));
                 return true;
             case R.id.upload_pets:
-                startActivity(new Intent(this, Uploadinfo.class));
+                startActivity(new Intent(this, UploadInfo.class));
                 return true;
             case R.id.sign_out:
                 mAuth.signOut();

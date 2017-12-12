@@ -197,7 +197,16 @@ public class MyPets extends AppCompatActivity {
 
         recyclerView.setAdapter(mFirebaseAdapter);
 
+        if (savedInstanceState != null) {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+    }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
     }
 
     @Override
@@ -217,7 +226,7 @@ public class MyPets extends AppCompatActivity {
                 startActivity(new Intent(this, MyPets.class));
                 return true;
             case R.id.upload_pets:
-                startActivity(new Intent(this, Uploadinfo.class));
+                startActivity(new Intent(this, UploadInfo.class));
                 return true;
             case R.id.sign_out:
                 mAuth.signOut();

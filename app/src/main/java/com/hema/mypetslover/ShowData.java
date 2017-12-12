@@ -32,7 +32,7 @@ public class ShowData extends AppCompatActivity {
 
     private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
     static SharedPreferences.Editor editor, editor2;
-    StatefulRecyclerView recyclerView;
+    RecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
     DatabaseReference myRef2;
@@ -45,6 +45,11 @@ public class ShowData extends AppCompatActivity {
     LinearLayoutManager llManager;
     private FirebaseAuth mAuth;
     private FirebaseRecyclerAdapter<ShowDataItems, ShowDataViewHolder> mFirebaseAdapter;
+    int lastFirstVisiblePosition;
+
+    Parcelable parce;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,7 +77,7 @@ public class ShowData extends AppCompatActivity {
         myRef2 = FirebaseDatabase.getInstance().getReference(user.getUid());
 
 
-        recyclerView = (StatefulRecyclerView) findViewById(R.id.show_data_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.show_data_recycler_view);
 
 
         recyclerView.setLayoutManager(llManager);
@@ -101,23 +106,33 @@ public class ShowData extends AppCompatActivity {
 
 
         recyclerView.setAdapter(mFirebaseAdapter);
-       /* if (savedInstanceState != null) {
+
+       // ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(lastFirstVisiblePosition,0);
+
+
+
+        if (savedInstanceState != null) {
             Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
             recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
         }
 
-        if (positionIndex!= -1) {
-            llManager.scrollToPositionWithOffset(positionIndex, topView);
-        }*/
-
 
     }
 
-   /* @Override
+    /*@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        lastFirstVisiblePosition = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition();
+
+    }*/
+
+
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
-    }*/
+    }
 
 
  /*  @Override
@@ -159,7 +174,7 @@ public class ShowData extends AppCompatActivity {
                 startActivity(new Intent(this, MyPets.class));
                 return true;
             case R.id.upload_pets:
-                startActivity(new Intent(this, Uploadinfo.class));
+                startActivity(new Intent(this, UploadInfo.class));
                 return true;
             case R.id.sign_out:
                 mAuth.signOut();

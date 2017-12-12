@@ -44,7 +44,7 @@
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="wait">Wait !  Fetching List... </string>
-    <string name="wantdelete" >Do you want to Delete this data ?</string>
+    <string name="wantdelete">Do you want to Delete this data ?</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
     <string name="confirm">Confirm</string>
@@ -59,8 +59,8 @@
 
     <string name="createdAccount">Created Account</string>
 
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

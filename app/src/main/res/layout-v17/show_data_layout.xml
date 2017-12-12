@@ -18,7 +18,7 @@
     </android.support.v7.widget.Toolbar>
 
 
-    <com.hema.mypetslover.StatefulRecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/show_data_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

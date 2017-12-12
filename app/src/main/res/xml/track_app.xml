@@ -4,6 +4,6 @@
     <bool name="ga_autoActivityTracking">true</bool>
     <screenName name="com.hema.mypetslover.MyPets">My pets</screenName>
     <screenName name="com.hema.mypetslover.ShowData">People's pets</screenName>
-    <screenName name="com.hema.mypetslover.Uploadinfo">Upload pet</screenName>
+    <screenName name="com.hema.mypetslover.UploadInfo">Upload pet</screenName>
 
 </resources>

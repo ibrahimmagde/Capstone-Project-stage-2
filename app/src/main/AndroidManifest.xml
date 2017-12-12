@@ -22,15 +22,17 @@
         </activity>
 
         <activity
-            android:name=".Uploadinfo"
+            android:name=".UploadInfo"
             android:label="Upload pet"/>
 
         <activity
             android:name=".ShowData"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="People&apos;s pets"/>
 
         <activity
             android:name=".MyPets"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="My pets">
         </activity>
 
