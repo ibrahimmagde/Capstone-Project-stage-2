@@ -39,13 +39,26 @@
     <string name="myemail">my email :</string>
 
 
-
-
     <string name="ad">google ad</string>
 
 
-
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="wait">Wait !  Fetching List... </string>
+    <string name="wantdelete" >Do you want to Delete this data ?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+    <string name="confirm">Confirm</string>
+
+
+    <string name="pleaseemail">please enter your email</string>
+    <string name="pleasepass">please enter your password</string>
+    <string name="signupfail">Signed up Failed</string>
+    <string name="signinfail">Signed in Failed</string>
+    <string name="nameedit">Name</string>
+
+
+    <string name="createdAccount">Created Account</string>
+
 
 
 

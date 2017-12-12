@@ -1,9 +1,9 @@
 package com.hema.mypetslover;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -23,8 +23,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class SignUp extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private EditText email,password,name;
-    private Button  signup;
+    private EditText email, password,name;
+    private Button signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +44,18 @@ public class SignUp extends AppCompatActivity {
         adView.loadAd(adRequest);
         mAuth = FirebaseAuth.getInstance(); // important Call
 
-        signup = (Button)findViewById(R.id.signup);
-        email = (EditText)findViewById(R.id.etEmail);
-        password = (EditText)findViewById(R.id.etPassword);
+        signup = (Button) findViewById(R.id.signup);
+        email = (EditText) findViewById(R.id.etEmail);
+        password = (EditText) findViewById(R.id.etPassword);
+        name =(EditText) findViewById(R.id.etName);
+
 
         //Check if User is Already LoggedIn
-        if(mAuth.getCurrentUser() != null)
-        {
+        if (mAuth.getCurrentUser() != null) {
             //User NOT logged In
             finish();
-            startActivity(new Intent(getApplicationContext(),ShowData.class));
+            startActivity(new Intent(getApplicationContext(), ShowData.class));
         }
-
 
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -64,13 +64,11 @@ public class SignUp extends AppCompatActivity {
 
                 String getemail = email.getText().toString().trim();
                 String getepassword = password.getText().toString().trim();
-                if( getemail.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"please enter your email",Toast.LENGTH_LONG).show();
-                }
-                else if(getepassword.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"please enter your password",Toast.LENGTH_LONG).show();
-                }
-                else {
+                if (getemail.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), R.string.pleaseemail, Toast.LENGTH_LONG).show();
+                } else if (getepassword.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), R.string.pleasepass, Toast.LENGTH_LONG).show();
+                } else {
 
                     callsignup(getemail, getepassword);
                 }
@@ -80,8 +78,11 @@ public class SignUp extends AppCompatActivity {
 
     }
 
+
+
+
     //Create Account
-    private void callsignup(String email,String password) {
+    private void callsignup(String email, String password) {
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignUp.this, new OnCompleteListener<AuthResult>() {
@@ -89,19 +90,17 @@ public class SignUp extends AppCompatActivity {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("TESTING", "Sign up Successful" + task.isSuccessful());
+                      //  Log.d("TESTING", "Sign up Successful" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(SignUp.this, "Signed up Failed", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                            Toast.makeText(SignUp.this,R.string.signupfail, Toast.LENGTH_SHORT).show();
+                        } else {
                             userProfile();
-                            Toast.makeText(SignUp.this, "Created Account", Toast.LENGTH_SHORT).show();
-                            Log.d("TESTING", "Created Account");
+                            Toast.makeText(SignUp.this, R.string.createdAccount, Toast.LENGTH_SHORT).show();
+                         //   Log.d("TESTING", "Created Account");
                         }
                     }
 
@@ -111,11 +110,9 @@ public class SignUp extends AppCompatActivity {
 
 
     //Set UserDisplay Name
-    private void userProfile()
-    {
+    private void userProfile() {
         FirebaseUser user = mAuth.getCurrentUser();
-        if(user!= null)
-        {
+        if (user != null) {
             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name.getText().toString().trim())
                     //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))  // here you can set image link also.
@@ -126,7 +123,7 @@ public class SignUp extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Log.d("TESTING", "User profile updated.");
+                              //  Log.d("TESTING", "User profile updated.");
                             }
                         }
                     });

@@ -1,179 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:background="@color/colorAccent"
-xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_gravity="center">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/detail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-    </android.support.v7.widget.Toolbar>
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:orientation="horizontal">
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/user_image"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:src="@drawable/upload"
-            android:contentDescription="@string/uploadimag"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/uploadimag"
+                android:focusable="true"
+                android:nextFocusDown="@+id/select_image"
+                android:src="@drawable/upload"
+                />
+
+            <Button
+                android:id="@id/select_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimaryDark"
+                android:contentDescription="@string/selectimage"
+                android:focusable="true"
+                android:nextFocusDown="@+id/etTitle"
+                android:nextFocusUp="@id/user_image"
+                android:text="@string/selectimage"
+                android:textColor="#ffff"
+                />
+
+        </LinearLayout>
+
+
+        <EditText
+            android:id="@id/etTitle"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:contentDescription="@string/petname"
+            android:ems="10"
             android:focusable="true"
-            android:nextFocusDown="@+id/select_image"
+            android:hint="@string/petname"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/phone"
+            android:nextFocusUp="@id/select_image"
             />
+
+        <EditText
+            android:id="@id/phone"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/phone"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="@string/phone"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/email"
+            android:nextFocusUp="@id/phone"
+            />
+
+        <EditText
+            android:id="@id/email"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/email"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="@string/email"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/district"
+            android:nextFocusUp="@id/email"
+            />
+
+        <EditText
+            android:id="@id/district"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/district"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="@string/district"
+            android:inputType="textPersonName"
+            android:nextFocusDown="@+id/searchfor"
+            android:nextFocusUp="@id/email"
+            />
+
+
+        <TextView
+            android:id="@id/searchfor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/searchfor"
+            android:focusable="true"
+            android:nextFocusDown="@+id/male"
+            android:nextFocusUp="@id/district"
+            android:text="@string/searchfor"
+            android:textColor="#000000"
+            />
+
+        <RadioGroup
+            android:id="@+id/radiogroupp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RadioButton
+                android:id="@id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:nextFocusDown="@+id/female"
+                android:nextFocusUp="@id/searchfor"
+                android:text="@string/male"
+                />
+
+            <RadioButton
+                android:id="@id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:nextFocusDown="@+id/upload_bttn"
+                android:nextFocusUp="@id/male"
+                android:text="@string/female"
+                />
+
+
+        </RadioGroup>
+
 
         <Button
-            android:id="@id/select_image"
+            android:id="@id/upload_bttn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/selectimage"
-            android:contentDescription="@string/selectimage"
+            android:layout_marginTop="8dp"
             android:background="@color/colorPrimaryDark"
-            android:textColor="#ffff"
+            android:contentDescription="@string/uploadbutton"
             android:focusable="true"
-            android:nextFocusDown="@+id/etTitle"
-            android:nextFocusUp="@id/user_image"
-            android:layout_gravity="center"
+            android:nextFocusUp="@id/etTitle"
+            android:text="@string/uploadbutton"
+            android:textColor="#ffff"
             />
+
 
     </LinearLayout>
-
-
-
-
-    <EditText
-        android:layout_margin="5dp"
-        android:id="@id/etTitle"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="@string/petname"
-        android:contentDescription="@string/petname"
-        android:inputType="textPersonName"
-        android:focusable="true"
-        android:nextFocusDown="@+id/phone"
-        android:nextFocusUp="@id/select_image"
-     />
-
-    <EditText
-        android:id="@id/phone"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="@string/phone"
-        android:contentDescription="@string/phone"
-        android:inputType="textPersonName"
-        android:focusable="true"
-        android:nextFocusDown="@+id/email"
-        android:nextFocusUp="@id/phone"
-        />
-
-    <EditText
-        android:id="@id/email"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:contentDescription="@string/email"
-        android:inputType="textPersonName"
-        android:focusable="true"
-        android:nextFocusDown="@+id/district"
-        android:nextFocusUp="@id/email"
-        />
-
-    <EditText
-        android:id="@id/district"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:hint="@string/district"
-        android:contentDescription="@string/district"
-        android:inputType="textPersonName"
-        android:focusable="true"
-        android:nextFocusDown="@+id/searchfor"
-        android:nextFocusUp="@id/email"
-        />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@id/searchfor"
-        android:text="@string/searchfor"
-        android:contentDescription="@string/searchfor"
-        android:focusable="true"
-        android:nextFocusDown="@+id/male"
-        android:nextFocusUp="@id/district"
-        android:textColor="#000000"
-        />
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/radiogroupp"
-        >
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@id/male"
-            android:text="@string/male"
-            android:focusable="true"
-            android:nextFocusDown="@+id/female"
-            android:nextFocusUp="@id/searchfor"
-            />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@id/female"
-            android:text="@string/female"
-            android:focusable="true"
-            android:nextFocusDown="@+id/upload_bttn"
-            android:nextFocusUp="@id/male"
-            />
-
-
-    </RadioGroup>
-
-
-    <Button
-        android:id="@id/upload_bttn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/uploadbutton"
-        android:contentDescription="@string/uploadbutton"
-        android:layout_marginTop="8dp"
-        android:focusable="true"
-        android:nextFocusUp="@id/etTitle"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="#ffff"
-        />
-
-
-</LinearLayout>
-
-
 
 
 </LinearLayout>

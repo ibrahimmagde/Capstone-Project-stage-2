@@ -1,40 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/colorAccent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
 
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:layout_gravity="center">
+        android:orientation="vertical">
 
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/nameedit"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="@string/nameedit"
+            android:inputType="textEmailAddress"
+            android:nextFocusDown="@id/etPassword"/>
+
+        />
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/emaileditbox"
             android:ems="10"
+            android:focusable="true"
             android:hint="@string/emaileditbox"
             android:inputType="textEmailAddress"
-            android:layout_marginTop="15dp"
-            android:focusable="true"
-            android:nextFocusDown="@id/etPassword"
-            android:contentDescription="@string/emaileditbox"/>
+            android:nextFocusDown="@id/etPassword"/>
 
         />
 
@@ -42,11 +56,11 @@
             android:id="@+id/etPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/passwordeditbox"
             android:ems="10"
+            android:focusable="true"
             android:hint="@string/passwordeditbox"
             android:inputType="textPassword"
-            android:contentDescription="@string/passwordeditbox"
-            android:focusable="true"
             android:nextFocusDown="@+id/signup"
             android:nextFocusUp="@id/etEmail"
             />
@@ -56,29 +70,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:padding="3dp"
-            android:text="@string/signupbutton"
             android:background="@color/colorPrimaryDark"
-            android:textColor="#ffff"
             android:contentDescription="@string/signupbutton"
             android:focusable="true"
             android:nextFocusUp="@id/etPassword"
+            android:padding="3dp"
+            android:text="@string/signupbutton"
+            android:textColor="#ffff"
             />
-
-
-
 
 
     </LinearLayout>
 
     <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        ads:adSize="BANNER"
         android:contentDescription="@string/ad"
+        ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
 
     </com.google.android.gms.ads.AdView>

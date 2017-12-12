@@ -30,30 +30,21 @@ import java.util.ArrayList;
 
 public class ShowData extends AppCompatActivity {
 
-    RecyclerView recyclerView;
+    private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
+    static SharedPreferences.Editor editor, editor2;
+    StatefulRecyclerView recyclerView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
     DatabaseReference myRef2;
-
-    private FirebaseAuth mAuth;
     FirebaseUser user;
-
     long currentVisiblePosition = 0;
     int x;
-
-    private FirebaseRecyclerAdapter<ShowDataItems, ShowDataViewHolder> mFirebaseAdapter;
-
-
-    static   SharedPreferences.Editor editor,editor2;
-    String mk="";
-
+    String mk = "";
     ArrayList<String> pl;
-
-    int positionIndex,topView;
+    int positionIndex, topView;
     LinearLayoutManager llManager;
-
-
-    private static final String BUNDLE_RECYCLER_LAYOUT = "classname.recycler.layout";
+    private FirebaseAuth mAuth;
+    private FirebaseRecyclerAdapter<ShowDataItems, ShowDataViewHolder> mFirebaseAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,15 +54,13 @@ public class ShowData extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-        pl=new ArrayList<>();
+        pl = new ArrayList<>();
 
-        llManager= new LinearLayoutManager(ShowData.this);
+        llManager = new LinearLayoutManager(ShowData.this);
 
 
         editor = getSharedPreferences("SHARED", MODE_PRIVATE).edit();
         editor2 = getSharedPreferences("SHARED2", MODE_PRIVATE).edit();
-
-
 
 
         Firebase.setAndroidContext(this);
@@ -83,7 +72,9 @@ public class ShowData extends AppCompatActivity {
         myRef2 = FirebaseDatabase.getInstance().getReference(user.getUid());
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.show_data_recycler_view);
+        recyclerView = (StatefulRecyclerView) findViewById(R.id.show_data_recycler_view);
+
+
         recyclerView.setLayoutManager(llManager);
         Toast.makeText(ShowData.this, "Wait !  Fetching List...", Toast.LENGTH_SHORT).show();
 
@@ -104,18 +95,32 @@ public class ShowData extends AppCompatActivity {
             }
 
 
-
         };
 
 
-        recyclerView.setAdapter(mFirebaseAdapter);
 
+
+        recyclerView.setAdapter(mFirebaseAdapter);
+       /* if (savedInstanceState != null) {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+
+        if (positionIndex!= -1) {
+            llManager.scrollToPositionWithOffset(positionIndex, topView);
+        }*/
 
 
     }
 
+   /* @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+    }*/
 
-  /*  @Override
+
+ /*  @Override
     protected void onResume() {
         super.onResume();
         if (positionIndex!= -1) {
@@ -123,6 +128,8 @@ public class ShowData extends AppCompatActivity {
         }
 
     }
+
+
 
     @Override
     protected void onPause() {
@@ -132,69 +139,8 @@ public class ShowData extends AppCompatActivity {
         View startView = recyclerView.getChildAt(0);
         topView = (startView == null) ? 0 : (startView.getTop() - recyclerView.getPaddingTop());
 
-    }*/
-
-
-    //View Holder For Recycler View
-    public static class ShowDataViewHolder extends RecyclerView.ViewHolder {
-        private final TextView image_title;
-        private final ImageView image_url;
-        private final TextView  phone,email,district,searchfor,gender;
-
-
-
-
-
-        public ShowDataViewHolder(final View itemView) {
-            super(itemView);
-            image_url = (ImageView) itemView.findViewById(R.id.fetch_image);
-            image_title = (TextView) itemView.findViewById(R.id.fetch_image_title);
-            phone = (TextView) itemView.findViewById(R.id.phone);
-            email = (TextView) itemView.findViewById(R.id.email);
-            district = (TextView) itemView.findViewById(R.id.district);
-            searchfor = (TextView) itemView.findViewById(R.id.searchfor);
-            gender = (TextView) itemView.findViewById(R.id.gender);
-
-
-
-
-        }
-
-        private void Image_Title(String title) {
-            image_title.setText(title);
-        }
-
-        private void Image_URL(String title) {
-            // image_url.setImageResource(R.drawable.loading);
-            Glide.with(itemView.getContext())
-                    .load(title)
-                    .crossFade()
-                    .placeholder(R.drawable.loading)
-                    .thumbnail(0.1f)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(image_url);
-        }
-
-        private void Phone(String phones){
-            phone.setText(phones);
-        }
-        private void Email(String emails){
-            email.setText(emails);
-        }
-        private void District(String districts){
-            district.setText(districts);
-        }
-        private void SearchFor(String genders){
-            gender.setText(genders);
-        }
-
-
-
-
-
-
     }
-
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -227,25 +173,62 @@ public class ShowData extends AppCompatActivity {
         }
 
 
-
     }
 
 
-    @Override
-    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
 
-        if(savedInstanceState != null)
-        {
-            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            recyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+    //View Holder For Recycler View
+    public static class ShowDataViewHolder extends RecyclerView.ViewHolder {
+        private final TextView image_title;
+        private final ImageView image_url;
+        private final TextView phone, email, district, searchfor, gender;
+
+
+        public ShowDataViewHolder(final View itemView) {
+            super(itemView);
+            image_url = (ImageView) itemView.findViewById(R.id.fetch_image);
+            image_title = (TextView) itemView.findViewById(R.id.fetch_image_title);
+            phone = (TextView) itemView.findViewById(R.id.phone);
+            email = (TextView) itemView.findViewById(R.id.email);
+            district = (TextView) itemView.findViewById(R.id.district);
+            searchfor = (TextView) itemView.findViewById(R.id.searchfor);
+            gender = (TextView) itemView.findViewById(R.id.gender);
+
+
         }
-    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, recyclerView.getLayoutManager().onSaveInstanceState());
+        private void Image_Title(String title) {
+            image_title.setText(title);
+        }
+
+        private void Image_URL(String title) {
+            // image_url.setImageResource(R.drawable.loading);
+            Glide.with(itemView.getContext())
+                    .load(title)
+                    .crossFade()
+                    .placeholder(R.drawable.loading)
+                    .thumbnail(0.1f)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(image_url);
+        }
+
+        private void Phone(String phones) {
+            phone.setText(phones);
+        }
+
+        private void Email(String emails) {
+            email.setText(emails);
+        }
+
+        private void District(String districts) {
+            district.setText(districts);
+        }
+
+        private void SearchFor(String genders) {
+            gender.setText(genders);
+        }
+
+
     }
 
 

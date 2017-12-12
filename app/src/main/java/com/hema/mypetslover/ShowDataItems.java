@@ -1,10 +1,9 @@
 package com.hema.mypetslover;
 
 
-
 public class ShowDataItems {
-    private String  Image_URL,Image_Title,District,Email,Gender,Phone;
-     //put this name same as Database Fields
+    private String Image_URL, Image_Title, District, Email, Gender, Phone;
+    //put this name same as Database Fields
 
 
     public String getImage_URL() {

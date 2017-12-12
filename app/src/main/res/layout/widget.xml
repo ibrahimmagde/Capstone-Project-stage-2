@@ -8,39 +8,38 @@
               android:padding="3dp">
 
     <TextView
+        android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:background="@color/colorPrimary"
         android:gravity="center"
+        android:textAllCaps="true"
         android:textColor="#ffffff"
         android:textSize="30sp"
-        android:id="@+id/name"
         android:textStyle="bold"
-        android:textAllCaps="true"
-        android:background="@color/colorPrimary"
         />
-
 
 
     <LinearLayout
         android:id="@+id/lover"
-        android:background="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/loverimage"
             android:layout_width="120dp"
             android:layout_height="120dp"
-             />
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="4dp"
             android:layout_weight="2"
             android:minHeight="150dp"
-            android:layout_margin="4dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -59,10 +58,10 @@
                     />
 
                 <TextView
+                    android:id="@+id/gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/gender"
                     android:textColor="#000000"
                     />
             </LinearLayout>
@@ -84,10 +83,10 @@
                     />
 
                 <TextView
+                    android:id="@+id/live"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/live"
                     android:textColor="#000000"
                     />
             </LinearLayout>
@@ -109,10 +108,10 @@
                     />
 
                 <TextView
+                    android:id="@+id/call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/call"
                     android:textColor="#000000"
                     />
             </LinearLayout>
@@ -133,10 +132,10 @@
                     />
 
                 <TextView
+                    android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/email"
                     android:textColor="#000000"
                     />
             </LinearLayout>
@@ -146,16 +145,16 @@
 
 
     </LinearLayout>
+
     <Button
-        android:padding="3dp"
         android:id="@+id/load_another"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#ffffff"
         android:layout_gravity="center"
         android:background="@color/colorPrimaryDark"
-        android:text="@string/loadanot" />
-
+        android:padding="3dp"
+        android:text="@string/loadanot"
+        android:textColor="#ffffff"/>
 
 
 </LinearLayout>

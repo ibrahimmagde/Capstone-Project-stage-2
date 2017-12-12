@@ -1,15 +1,18 @@
 <menu xmlns:androclass="http://schemas.android.com/apk/res/android"
-      xmlns:android="http://schemas.android.com/apk/res-auto">
+    >
 
-    <item androclass:id="@+id/show_pets"
-          androclass:title="people's pets"/>
-    <item androclass:id="@+id/my_pets"
-          androclass:title="my pets"/>
-    <item androclass:id="@+id/upload_pets"
-          androclass:title="upload pet"/>
-    <item androclass:id="@+id/sign_out"
-          androclass:title="sign out"/>
-
+    <item
+        androclass:id="@+id/show_pets"
+        androclass:title="people's pets"/>
+    <item
+        androclass:id="@+id/my_pets"
+        androclass:title="my pets"/>
+    <item
+        androclass:id="@+id/upload_pets"
+        androclass:title="upload pet"/>
+    <item
+        androclass:id="@+id/sign_out"
+        androclass:title="sign out"/>
 
 
 </menu>

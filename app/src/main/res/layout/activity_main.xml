@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/colorAccent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:orientation="vertical"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:layout_gravity="center">
-
+        android:orientation="vertical">
 
 
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:contentDescription="@string/emaileditbox"
             android:ems="10"
+            android:focusable="true"
             android:hint="@string/emaileditbox"
             android:inputType="textEmailAddress"
-            android:layout_marginTop="15dp"
-            android:focusable="true"
-            android:nextFocusDown="@+id/etPassword"
-            android:contentDescription="@string/emaileditbox"/>
+            android:nextFocusDown="@+id/etPassword"/>
 
         />
 
@@ -42,11 +41,11 @@
             android:id="@id/etPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/passwordeditbox"
             android:ems="10"
+            android:focusable="true"
             android:hint="@string/passwordeditbox"
             android:inputType="textPassword"
-            android:contentDescription="@string/passwordeditbox"
-            android:focusable="true"
             android:nextFocusDown="@+id/signin"
             android:nextFocusUp="@id/etEmail"
             />
@@ -56,14 +55,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="@string/signinbutton"
             android:background="@color/colorPrimaryDark"
-            android:textColor="#fff"
-            android:padding="3dp"
             android:contentDescription="@string/signinbutton"
             android:focusable="true"
             android:nextFocusDown="@+id/gotosignup"
             android:nextFocusUp="@id/etPassword"
+            android:padding="3dp"
+            android:text="@string/signinbutton"
+            android:textColor="#fff"
             />
 
 
@@ -71,18 +70,15 @@
             android:id="@id/gotosignup"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/my_text"
-            android:onClick="goSignup"
             android:contentDescription="@string/my_text"
             android:focusable="true"
             android:nextFocusUp="@id/signin"
+            android:onClick="goSignup"
+            android:text="@string/my_text"
             />
 
 
-
     </LinearLayout>
-
-
 
 
 </LinearLayout>

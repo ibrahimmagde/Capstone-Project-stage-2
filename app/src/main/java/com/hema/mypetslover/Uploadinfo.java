@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.client.Firebase;
@@ -34,59 +35,55 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import java.util.Random;
 
+import java.util.Random;
 
 
 public class Uploadinfo extends AppCompatActivity {
 
-    Button select_image,upload_button;
-    ImageView user_image;
-    EditText title , contactInfo,email,district;
-    RadioGroup mRadioGroup ;
     public static final int READ_EXTERNAL_STORAGE = 0;
     private static final int GALLERY_INTENT = 2;
+    static SharedPreferences.Editor editor2;
+    Button select_image, upload_button;
+    ImageView user_image;
+    EditText title, contactInfo, email, district;
+    RadioGroup mRadioGroup;
+    FirebaseUser user;
+    String gender;
     private ProgressDialog mProgressDialog;
     private Firebase mRoofRef;
     private Firebase mUser;
     private Uri mImageUri = null;
     private DatabaseReference mdatabaseRef;
     private StorageReference mStorage;
-    private String mName,contactINfo,mEmail,mDistrict;
-
+    private String mName, contactINfo, mEmail, mDistrict;
     private FirebaseAuth mAuth;
-    FirebaseUser user;
-    String gender;
-    static   SharedPreferences.Editor editor2;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.upload_layout);
-       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
         editor2 = getSharedPreferences("go", MODE_PRIVATE).edit();
 
 
-
         mAuth = FirebaseAuth.getInstance(); // important Call
-        user=mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         Firebase.setAndroidContext(this);
 
 
-
-        select_image = (Button)findViewById(R.id.select_image);
-        upload_button = (Button)findViewById(R.id.upload_bttn);
+        select_image = (Button) findViewById(R.id.select_image);
+        upload_button = (Button) findViewById(R.id.upload_bttn);
         user_image = (ImageView) findViewById(R.id.user_image);
         title = (EditText) findViewById(R.id.etTitle);
-        contactInfo =(EditText) findViewById(R.id.phone);
-        email =(EditText) findViewById(R.id.email);
-        district =(EditText) findViewById(R.id.district);
+        contactInfo = (EditText) findViewById(R.id.phone);
+        email = (EditText) findViewById(R.id.email);
+        district = (EditText) findViewById(R.id.district);
 
-        mRadioGroup = (RadioGroup)findViewById(R.id.radiogroupp);
+        mRadioGroup = (RadioGroup) findViewById(R.id.radiogroupp);
 
 
         //Initialize the Progress Bar
@@ -96,20 +93,15 @@ public class Uploadinfo extends AppCompatActivity {
         //Select image from External Storage...
         select_image.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //Check for Runtime Permission
                 if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                        != PackageManager.PERMISSION_GRANTED)
-                {
+                        != PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "Call for Permission", Toast.LENGTH_SHORT).show();
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, READ_EXTERNAL_STORAGE);
                     }
-                }
-                else
-                    {
+                } else {
                     callgalary();
                 }
             }
@@ -124,50 +116,48 @@ public class Uploadinfo extends AppCompatActivity {
         mStorage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://my-pet-s-lover.appspot.com/");
 
 
-
         //Click on Upload Button Title will upload to Database
         upload_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 mName = title.getText().toString().trim();
-              mEmail  = email.getText().toString().trim();
-              mDistrict   = district.getText().toString().trim();
+                mEmail = email.getText().toString().trim();
+                mDistrict = district.getText().toString().trim();
 
                 contactINfo = contactInfo.getText().toString().trim();
                 int selectedId = mRadioGroup.getCheckedRadioButtonId();
 
                 // find which radioButton is checked by id
-                if(selectedId == R.id.male) {
-                    gender="Male";
+                if (selectedId == R.id.male) {
+                    gender = "Male";
 
 
-                } else  {
+                } else {
 
-                    gender="Female";
+                    gender = "Female";
                 }
 
 
-                if(mName.isEmpty())
-                {
+                if (mName.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "please write the name", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(mEmail.isEmpty()&&mDistrict.isEmpty()&&contactINfo.isEmpty()){
+                if (mEmail.isEmpty() && mDistrict.isEmpty() && contactINfo.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "please provide any contact method", Toast.LENGTH_SHORT).show();
                     return;
 
                 }
 
-                if(gender.isEmpty()){
+                if (gender.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "please provide the gender", Toast.LENGTH_SHORT).show();
                     return;
 
                 }
 
                 SharedPreferences preferences = getSharedPreferences("val", MODE_PRIVATE);
-                int x=  preferences.getInt("i",0);
+                int x = preferences.getInt("i", 0);
 
 
                 Firebase childRef_name = mRoofRef.child("Image_Title");
@@ -203,20 +193,16 @@ public class Uploadinfo extends AppCompatActivity {
                 id2.setValue(String.valueOf(c));
 
 
-
                 Firebase childRef_name2 = mUser.child("Image_Title");
                 childRef_name2.setValue(mName);
-
 
 
                 Firebase childRef_counter2 = mUser.child("Counter");
                 childRef_counter2.setValue("0");
 
 
-
                 Firebase mContactInfo1 = mUser.child("Phone");
                 mContactInfo1.setValue(contactINfo);
-
 
 
                 Firebase mEmail1ss = mUser.child("Email");
@@ -227,11 +213,10 @@ public class Uploadinfo extends AppCompatActivity {
                 mDistrict1ss.setValue(mDistrict);
 
 
-
                 Firebase mGender1 = mUser.child("Gender");
                 mGender1.setValue(gender);
 
-                startActivity(new Intent(getApplicationContext(),MyPets.class));
+                startActivity(new Intent(getApplicationContext(), MyPets.class));
 
             }
         });
@@ -251,7 +236,6 @@ public class Uploadinfo extends AppCompatActivity {
         }
         Toast.makeText(getApplicationContext(), "...", Toast.LENGTH_SHORT).show();
     }
-
 
 
     //If Access Granted gallery Will open
@@ -281,37 +265,38 @@ public class Uploadinfo extends AppCompatActivity {
             mProgressDialog.setMessage("Uploading Image....");
             mProgressDialog.show();
 
-                filePath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+            filePath.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        Uri downloadUri = taskSnapshot.getDownloadUrl();  //Ignore This error
+                    Uri downloadUri = taskSnapshot.getDownloadUrl();  //Ignore This error
 
-                        editor2.putString("give", String.valueOf(downloadUri));
-                        editor2.apply();
-                        Intent intentwidget = new Intent(getApplicationContext(), Widget.class);
-                        intentwidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                        int ids[] = AppWidgetManager.getInstance(getApplicationContext()).getAppWidgetIds(new ComponentName(getApplicationContext(), Widget.class));
-                        intentwidget.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
-                        getApplicationContext().sendBroadcast(intentwidget);
-
-
-                        mRoofRef.child("Image_URL").setValue(downloadUri.toString());
-                        mUser.child("Image_URL").setValue(downloadUri.toString());
-
-                        Glide.with(getApplicationContext())
-                                .load(downloadUri)
-                                .crossFade()
-                                .placeholder(R.drawable.loading)
-                                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                                .into(user_image);
-                        Toast.makeText(getApplicationContext(), "Updated.", Toast.LENGTH_SHORT).show();
-                        mProgressDialog.dismiss();
-                    }
-                });
+                    editor2.putString("give", String.valueOf(downloadUri));
+                    editor2.apply();
+                    Intent intentwidget = new Intent(getApplicationContext(), Widget.class);
+                    intentwidget.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+                    int ids[] = AppWidgetManager.getInstance(getApplicationContext()).getAppWidgetIds(new ComponentName(getApplicationContext(), Widget.class));
+                    intentwidget.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+                    getApplicationContext().sendBroadcast(intentwidget);
 
 
-        }    }
+                    mRoofRef.child("Image_URL").setValue(downloadUri.toString());
+                    mUser.child("Image_URL").setValue(downloadUri.toString());
+
+                    Glide.with(getApplicationContext())
+                            .load(downloadUri)
+                            .crossFade()
+                            .placeholder(R.drawable.loading)
+                            .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                            .into(user_image);
+                    Toast.makeText(getApplicationContext(), "Updated.", Toast.LENGTH_SHORT).show();
+                    mProgressDialog.dismiss();
+                }
+            });
+
+
+        }
+    }
 
 
     @Override
@@ -343,7 +328,6 @@ public class Uploadinfo extends AppCompatActivity {
 
 
         }
-
 
 
     }

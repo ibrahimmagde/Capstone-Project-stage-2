@@ -1,11 +1,10 @@
 package com.hema.mypetslover;
 
 import android.app.Application;
-import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.analytics.Logger;
+import com.google.android.gms.analytics.Tracker;
 import com.google.firebase.database.FirebaseDatabase;
 
 
@@ -15,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class MyApplication extends Application {
 
+    private static Tracker sTracker;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -22,19 +23,17 @@ public class MyApplication extends Application {
 
     }
 
-    private static Tracker sTracker;
-
-    public void startTracking(){
-        if(sTracker==null){
-            GoogleAnalytics ga =GoogleAnalytics.getInstance(this);
-            sTracker =ga.newTracker(R.xml.track_app);
+    public void startTracking() {
+        if (sTracker == null) {
+            GoogleAnalytics ga = GoogleAnalytics.getInstance(this);
+            sTracker = ga.newTracker(R.xml.track_app);
             ga.enableAutoActivityReports(this);
             ga.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
         }
 
     }
 
-    public Tracker getTracker(){
+    public Tracker getTracker() {
         startTracking();
         return sTracker;
     }
